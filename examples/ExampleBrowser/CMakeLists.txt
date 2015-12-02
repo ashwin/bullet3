@@ -9,7 +9,7 @@ INCLUDE_DIRECTORIES(
 FILE(GLOB ExampleBrowser_SRCS "*" "GwenGUISupport/*" )
 FILE(GLOB ExampleBrowser_HDRS "*" "GwenGUISupport/*" )
 
-
+ADD_DEFINITIONS(-DB3_USE_CLEW)
 
 SET(App_ExampleBrowser_SRCS
 	main.cpp
@@ -187,13 +187,32 @@ SET(App_ExampleBrowser_SRCS
 	../Utils/b3Clock.h
 	../Utils/b3ResourcePath.cpp
 	../Utils/b3ResourcePath.h
+
+    ../OpenCL/rigidbody/GpuRigidBodyDemo.h
+    ../OpenCL/rigidbody/GpuRigidBodyDemo.cpp
+    ../OpenCL/rigidbody/GpuConvexScene.h
+    ../OpenCL/rigidbody/GpuConvexScene.cpp
+    ../OpenCL/broadphase/PairBench.h
+    ../OpenCL/broadphase/PairBench.cpp
+
 	${ExampleBrowser_SRCS}
 	${ExampleBrowser_HDRS}
 	${BULLET_PHYSICS_SOURCE_DIR}/build3/bullet.rc
 )
 
 LINK_LIBRARIES(
-        Bullet3Common BulletSoftBody BulletDynamics BulletCollision BulletInverseDynamicsUtils BulletInverseDynamics LinearMath OpenGLWindow gwen ${OPENGL_gl_LIBRARY} ${OPENGL_glu_LIBRARY}
+        Bullet3Common
+        BulletSoftBody
+        BulletDynamics
+        BulletCollision
+        BulletInverseDynamicsUtils
+        BulletInverseDynamics
+        Bullet3OpenCL_clew
+        LinearMath
+        OpenGLWindow
+        gwen
+        ${OPENGL_gl_LIBRARY}
+        ${OPENGL_glu_LIBRARY}
 )
 
 IF (WIN32)
